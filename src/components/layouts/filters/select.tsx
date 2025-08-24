@@ -16,7 +16,15 @@ export const Select = <T,>({ elements, ...props }: SelectProps<T>) => {
     <div className="relative dark:text-white">
       <button className="z-50 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <div className={cn("relative w-60 p-0", props.className)}>
-          <HiChevronDown className="absolute top-0 right-0 z-30 h-6 w-6 translate-y-1/4" />
+          <HiChevronDown
+            className={cn(
+              "absolute top-0 right-0 z-30 h-6 w-6 -translate-x-1/4 translate-y-1/3 transition-transform duration-300",
+              {
+                "rotate-180": isOpen,
+              }
+            )}
+          />
+
           <div className="absolute right-0 left-0 m-0 mx-auto h-10 w-60 rounded-md shadow-md dark:bg-dark-element">
             <p className="mt-2 flex items-center px-2">
               {props?.value ? (
