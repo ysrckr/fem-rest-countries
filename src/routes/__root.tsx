@@ -29,8 +29,8 @@ function RootComponent() {
 
   return (
     <>
-    <Header/>
-      <main className="m-auto">
+      <Header />
+      <main className="container m-auto">
         <Outlet />
       </main>
 
