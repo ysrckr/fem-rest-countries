@@ -18,7 +18,6 @@ export const router = createRouter({
   defaultNotFoundComponent: DefaultNotFoundComponent,
   context: {
     queryClient,
-    
   },
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
@@ -36,10 +35,10 @@ declare module "@tanstack/react-router" {
   }
 }
 
+
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
-
   root.render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} defaultPreload="intent" />
