@@ -1,6 +1,6 @@
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
-import { Input } from "@/components/layouts/filters/input";
-import { Select } from "@/components/layouts/filters/select";
+import { Input } from "@/components/layouts/form-elements/input";
+import { Select } from "@/components/layouts/form-elements/select";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
