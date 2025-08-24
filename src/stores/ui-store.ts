@@ -1,34 +1,37 @@
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from "zustand/middleware";
 
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+
+export type Theme = "light" | "dark" | "system";
 
 type UIState = {
-  theme: "dark" | "light"
-}
+  theme: Theme;
+};
 
 type UIActions = {
-  setTheme: (theme: "dark" | "light") => void
-  toggleTheme: () => void
-}
+  setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
+};
 
 export const useUIStore = create<UIState & UIActions>()(
   persist(
     immer<UIState & UIActions>((set) => ({
-      theme: (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
+      theme: "system",
       setTheme: (theme) => {
         set((state) => {
-          state.theme = theme
-        })
+          state.theme = theme;
+        });
       },
       toggleTheme: () => {
         set((state) => {
-          state.theme = state.theme === "light" ? "dark" : "light"
-        })
-      }
-    })), {
+          state.theme = state.theme === "light" ? "dark" : "light";
+        });
+      },
+    })),
+    {
       name: "ui-store",
-      storage: createJSONStorage(() => sessionStorage)
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
-)
+);

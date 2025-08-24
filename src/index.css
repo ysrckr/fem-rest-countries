@@ -4,9 +4,7 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
-
-  --font-sans: 'Nunito Sans', sans-serif, ui-sans-serif, system-ui,  'Apple Color Emoji';
-
+  --font-sans: "Nunito Sans", sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji";
 
   --color-dark-element: hsl(209, 23%, 22%);
   --color-dark-bg: hsl(207, 26%, 17%);

@@ -25,6 +25,7 @@ function RouteComponent() {
           placeholder="Select a region..."
           value={selectedRegion}
           onChange={(value) => setSelectedRegion(value)}
+          className="w-48"
         />
       </section>
     </>
