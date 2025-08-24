@@ -40,7 +40,7 @@ function RootComponent() {
   return (
     <>
       <Header />
-      <main className="container m-auto">
+      <main className="container m-auto p-4">
         <Outlet />
       </main>
 
