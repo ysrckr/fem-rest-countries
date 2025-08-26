@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --font-sans: "Nunito Sans", sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji";
+
+  --color-dark-element: hsl(209, 23%, 22%);
+  --color-dark-bg: hsl(207, 26%, 17%);
+  --color-light-text: hsl(200, 15%, 8%);
+  --color-light-input: hsl(0, 0%, 50%);
+  --color-light-bg: hsl(0, 0%, 99%);
+}

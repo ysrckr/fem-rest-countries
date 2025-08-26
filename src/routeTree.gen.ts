@@ -9,27 +9,69 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as CountriesCountryCodeRouteImport } from './routes/countries/$countryCode'
 
-export interface FileRoutesByFullPath {}
-export interface FileRoutesByTo {}
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CountriesCountryCodeRoute = CountriesCountryCodeRouteImport.update({
+  id: '/countries/$countryCode',
+  path: '/countries/$countryCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/countries/$countryCode': typeof CountriesCountryCodeRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/countries/$countryCode': typeof CountriesCountryCodeRoute
+}
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/countries/$countryCode': typeof CountriesCountryCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: never
+  fullPaths: '/' | '/countries/$countryCode'
   fileRoutesByTo: FileRoutesByTo
-  to: never
-  id: '__root__'
+  to: '/' | '/countries/$countryCode'
+  id: '__root__' | '/' | '/countries/$countryCode'
   fileRoutesById: FileRoutesById
 }
-export interface RootRouteChildren {}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  CountriesCountryCodeRoute: typeof CountriesCountryCodeRoute
 }
 
-const rootRouteChildren: RootRouteChildren = {}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/countries/$countryCode': {
+      id: '/countries/$countryCode'
+      path: '/countries/$countryCode'
+      fullPath: '/countries/$countryCode'
+      preLoaderRoute: typeof CountriesCountryCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  CountriesCountryCodeRoute: CountriesCountryCodeRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
