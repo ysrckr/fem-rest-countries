@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Suspense, useCallback } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 
 import { BorderCountry } from "./-components/BorderCountry";
 import { Country } from "@/types/countries";
@@ -14,11 +14,22 @@ export const Route = createFileRoute("/countries/$countryCode")({
 
     return { country: country[0] };
   },
+
   component: RouteComponent,
 });
 
 function RouteComponent() {
   const { country } = Route.useLoaderData();
+
+  const title = country?.name?.common ? `Country - ${country.name.common}` : "Country";
+
+  useEffect(() => {
+    document.title = title;
+
+    return () => {
+      document.title = "Countries - Where in the World?";
+    };
+  }, [title]);
 
   type InfoItem = { label: string; value: string | number | undefined };
 

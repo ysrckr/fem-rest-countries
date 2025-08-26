@@ -14,7 +14,7 @@ export const Card = ({ children, image, title }: CardProps) => {
         <img src={image.src} alt={image.alt} className="h-64 w-full p-0 md:h-56 lg:h-48" />
       </div>
       <div className="p-4">
-        <h3 className="mb-4 text-xl font-bold">{title}</h3>
+        <h3 className="mb-4 truncate text-xl font-bold">{title}</h3>
         <div>{children}</div>
       </div>
     </div>
