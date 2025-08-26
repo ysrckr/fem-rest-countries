@@ -1,8 +1,34 @@
+# Single Page App routing: always serve index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[[build]]
+# Build settings
+[build]
   publish = "dist"
-  ignore = ["**/.*", "**/node_modules/**"]
+  command = "bun run build"
+
+# Optional: pin tool versions if needed (uncomment and adjust)
+[build.environment]
+  # BUN_VERSION = "1.1.0"   # set to a specific Bun version available on Netlify build image
+  NODE_VERSION = "20"
+
+# Cache aggressive for hashed assets produced by Vite
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security headers (tweak CSP as needed)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    # Note: Adjust CSP for any external origins your app needs (APIs, fonts, analytics)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'"
+
