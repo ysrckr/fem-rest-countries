@@ -1,5 +1,6 @@
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 
+import { Link } from "@tanstack/react-router";
 import { useUIStore } from "@/stores/ui-store";
 
 export const Header = () => {
@@ -9,7 +10,9 @@ export const Header = () => {
   return (
     <header className="bg-light-element z-10 w-full shadow-md transition-colors duration-300 dark:bg-dark-element dark:text-white">
       <section className="container mx-auto flex items-center justify-between p-4">
-        <h1 className="text-xl font-semibold">Where in the world?</h1>
+        <h1 className="text-xl font-semibold">
+          <Link to="/">Where in the world?</Link>
+        </h1>
         <button
           type="button"
           className="text-md flex cursor-pointer items-center gap-2 px-4 py-2"
